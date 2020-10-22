@@ -12,8 +12,7 @@ api = tradeapi.REST(api_key, api_secret, base_url, api_version='v2')
 account = api.get_account()
 print(account)
 
-
-#init websocket - How do I use WebSockets to stream data with the Alpaca API?
+'''init websocket - How do I use WebSockets to stream data with the Alpaca API? '''
 conn = tradeapi.stream2.StreamConn(api_key, api_secret, base_url)
 
 @conn.on(r'^account_updates$')
@@ -34,33 +33,12 @@ ws_thread.start()
 '''Data Examples - How do I get historical data from the Alpaca API?
 
 aapl = api.polygon.historic_agg_v2('AAPL', 1, 'day', _from='2019-01-01', to='2019-02-01').df
-aapl = api.alpha_vantage.historic_quotes('AAPL', adjusted=True, output_format='pandas')
-tsla = api.alpha_vantage.historic_quotes('TSLA', adjusted=True, output_format='json', cadence='weekly')
-tsla = api.alpha_vantage.intraday_quotes ('TSLA', interval='5min', output_format='csv')
+aapl = api.get_barset('AAPL', 'day')
+tsla = api.get_barset('TSLA', '15Min')
+aapl = api.get_barset('AAPL', 'day', limit=1000)
+
 '''
 
-
-''' How can I use indicators with the Alpaca API?
-
-#sma = api.alpha_vantage.techindicators(symbol='AAPL', interval='weekly', time_period='10', series_type='close')
-
-#rsi = api.alpha_vantage.techindicators(techindicator='RSI', symbol='AAPL', interval='weekly', time_period='14', series_type='close')
-
-print(sma)
-print(rsi)
-'''
-
-''' How can I fire order in the Alpaca API?
-
-api.submit_order(symbol='TSLA', 
-				qty=1, 
-				side='buy', 
-				time_in_force='gtc', 
-				type='limit', 
-				limit_price=400.00, 
-				client_order_id='001'
-				)
-'''
 
 '''  How do I set a stop loss or take profit?
 api.submit_order(symbol='TSLA', 
