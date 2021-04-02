@@ -7,7 +7,7 @@ import time
 api_key = 'Insert_your_api_key_here'
 api_secret = 'Insert_your_api_secret_here'
 base_url = 'https://paper-api.alpaca.markets'
-
+data_url = 'wss://data.alpaca.markets'
 
 # instantiate REST API
 api = tradeapi.REST(api_key, api_secret, base_url, api_version='v2')
@@ -15,7 +15,7 @@ api = tradeapi.REST(api_key, api_secret, base_url, api_version='v2')
 
 # init WebSocket
 conn = tradeapi.stream2.StreamConn(
-    api_key, api_secret, base_url=base_url, data_url=ws_url, data_stream='alpacadatav1'
+    api_key, api_secret, base_url=base_url, data_url=data_url, data_stream='alpacadatav1'
 )
 
 
